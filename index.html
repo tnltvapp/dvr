@@ -22,29 +22,37 @@
 
 
 			
-<center>
+
 
 <h2><br></h2>
 
+    <div id="twitch-embed"></div>
 
+    <!-- Load the Twitch embed script -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
 
-<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
-<div id="SamplePlayerDivID"></div>
-<script type="text/javascript">
-  var options = {
+    <!--
+      Create a Twitch.Embed object that will render
+      within the "twitch-embed" root element.
+    -->
+    <script type="text/javascript">
+      var embed = new Twitch.Embed("twitch-embed", {
+        width: '100%',
+        height: 520,
+        channel: "tnltvapp",
+        layout: "video",
+        autoplay: true,
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com 
+        parent: ["embed.example.com", "othersite.example.com"]
+      });
 
-    width: 720,
-    height: 480,
-    channel: "tnltvapp",
-    // only needed if your site is also embedded on embed.example.com and othersite.example.com 
-    parent: ["embed.example.com", "othersite.example.com"]
-  };
-  var player = new Twitch.Player("SamplePlayerDivID", options);
-  player.setVolume(0.5);
-</script>
+      embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+        var player = embed.getPlayer();
+        player.play();
+      });
+    </script>
+------------
 
-
-</center>
 
   
 	</body>
